@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "InstaCalm — Instagram with intention",
+  "version": "1.0.0",
+  "description": "Hide distracting Instagram destinations, set daily limits, and keep your connections. Local storage only.",
+  "permissions": ["storage"],
+  "background": {"service_worker":"background.js"},
+  "action": {"default_popup":"popup.html","default_title":"InstaCalm"},
+  "content_scripts": [
+    {"matches":["https://www.instagram.com/*"],"js":["shared.js","instagram.js"],"run_at":"document_start"},
+    {"matches":["https://ebnramadan.github.io/instacalm/*","http://localhost:4173/*"],"js":["bridge.js"],"run_at":"document_idle"}
+  ]
+}

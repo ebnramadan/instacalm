@@ -1,0 +1,3 @@
+/* Only matches the published app origin/path and localhost development. */
+window.addEventListener('message',e=>{if(e.source!==window||e.origin!==location.origin||e.data?.source!=='instacalm-app')return;const msg=e.data;if(!['get','set','clear'].includes(msg.type))return;chrome.runtime.sendMessage({type:msg.type,settings:msg.settings},response=>{if(chrome.runtime.lastError||!response||response.error)return;window.postMessage({source:'instacalm-extension',type:msg.quiet?'update':'ready',...response},location.origin)})});
+chrome.runtime.sendMessage({type:'get'},response=>{if(chrome.runtime.lastError||!response||response.error)return;window.postMessage({source:'instacalm-extension',type:'ready',...response},location.origin)});
